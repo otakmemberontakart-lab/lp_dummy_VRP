@@ -20,16 +20,16 @@
   --white:      #FFFFFF;
 
   /* ── Sunny Orange — section bold & CTA ── */
-  --orange:     #F07820;
-  --orange-dk:  #D96010;
-  --orange-dkr: #B84800;
+  --orange:     #E06818;
+  --orange-dk:  #C45510;
+  --orange-dkr: #A04008;
   --orange-lt:  #FFF0DC;
-  --orange-bd:  #FFD0A0;
+  --orange-bd:  #F5C890;
 
   /* ── Amber — price section bold ── */
-  --amber:      #F5A020;
-  --amber-dk:   #D88010;
-  --amber-lt:   #FFF6E0;
+  --amber:      #E09018;
+  --amber-dk:   #C07010;
+  --amber-lt:   #FFF4DC;
 
   /* ── Text ── */
   --dark:       #1A0E04;
@@ -52,16 +52,16 @@
   --warm-100: #F6ECD8;
   --warm-50:  #FDFAF5;
 
-  --orange-900: #6C2000;
-  --orange-800: #9C3000;
-  --orange-700: #C84400;
-  --orange-600: #E86010;
-  --orange-500: #F07820;
-  --orange-400: #F89848;
-  --orange-300: #FAB878;
-  --orange-200: #FCD4A8;
-  --orange-100: #FFF0DC;
-  --orange-50:  #FFF8F0;
+  --orange-900: #5C1800;
+  --orange-800: #882400;
+  --orange-700: #B03800;
+  --orange-600: #D05010;
+  --orange-500: #E06818;
+  --orange-400: #EC8840;
+  --orange-300: #F4A870;
+  --orange-200: #F8C8A0;
+  --orange-100: #FDE8D0;
+  --orange-50:  #FFF6EE;
 
   --gold-700:   #B07820;
   --gold-500:   #D89830;
@@ -544,17 +544,41 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.9) saturate(0.85);
+  /* remove filter so image is clearly visible on both sides */
+  filter: none;
 }
+/* Mobile: fade bottom into orange bg */
 .pain-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, var(--orange) 100%);
+  background: linear-gradient(to bottom, transparent 55%, var(--orange) 100%);
+  pointer-events: none;
 }
+/* Desktop: NO overlay on image — let the full split show */
 @media (min-width: 900px) {
   .pain-image-overlay {
-    background: linear-gradient(to right, transparent 30%, var(--orange) 100%);
+    background: none;
   }
+}
+
+/* Ba-labels inside pain section — TOP on mobile, TOP on desktop */
+.pain-image-wrap .ba-labels {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  bottom: auto;
+  display: flex;
+  pointer-events: none;
+  padding: 14px;
+  gap: 0;
+}
+.pain-image-wrap .ba-label {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+}
+.pain-image-wrap .ba-label-after {
+  justify-content: flex-end;
 }
 
 .pain-content {
@@ -1499,25 +1523,26 @@ a { color: inherit; text-decoration: none; }
 <section class="pain-section">
   <div class="pain-inner">
     <div class="pain-image-wrap">
+      <!-- labels di atas, bukan di bawah -->
+      <div class="ba-labels">
+        <div class="ba-label ba-label-before">
+          <span class="ba-label-pill">Sebelum</span>
+        </div>
+        <div class="ba-label ba-label-after">
+          <span class="ba-label-pill">Sesudah</span>
+        </div>
+      </div>
       <img
         src="https://drive.google.com/thumbnail?id=1QGEwfGeFAidULxnns1ts3KXQHr3GoyYu&sz=w1000"
         alt="Before after nonton TV — mata buram vs mata nyaman setelah Visual Reset Protocol"
         loading="lazy"
       >
-      <div class="ba-labels" style="position:absolute;inset:0;display:flex;pointer-events:none;">
-        <div class="ba-label ba-label-before" style="flex:1;display:flex;align-items:flex-end;padding:16px;">
-          <span class="ba-label-pill">Sebelum</span>
-        </div>
-        <div class="ba-label ba-label-after" style="flex:1;display:flex;align-items:flex-end;justify-content:flex-end;padding:16px;">
-          <span class="ba-label-pill">Sesudah</span>
-        </div>
-      </div>
       <div class="pain-image-overlay"></div>
     </div>
 
     <div class="pain-content">
-      <span class="t-section-label" style="color:var(--warm-500)">Kalau Ini Terasa Familiar</span>
-      <div class="divider divider-left" style="background:var(--warm-700)"></div>
+      <span class="t-section-label" style="color:rgba(255,255,255,0.8)">Kalau Ini Terasa Familiar</span>
+      <div class="divider divider-left" style="background:rgba(255,255,255,0.5)"></div>
 
       <h2 class="t-display t-h2 pain-headline">
         Kamu Tidak<br>Sendirian
